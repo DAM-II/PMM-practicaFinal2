@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pf2/models/persona.dart';
+import 'package:pf2/widgets/profile_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,21 +19,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             // Profile Card
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Text(persona.fullName),
-                    Text(persona.email),
-                    Text(
-                      "${persona.birthDate.day}/${persona.birthDate.month}/${persona.birthDate.year}",
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            // Spacing
+            ProfileCard(persona: persona),
             SizedBox(height: 20),
             // Action Buttons
             ElevatedButton(onPressed: () => {}, child: Text("Edit Profile")),
