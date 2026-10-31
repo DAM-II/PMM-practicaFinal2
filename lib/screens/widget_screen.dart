@@ -11,6 +11,12 @@ class WidgetScreen extends StatefulWidget {
 }
 
 class _WidgetScreenState extends State<WidgetScreen> {
+  List<String> dismissibleItems = [
+    "Swipe me left or right",
+    "Flutter widgets",
+    "Swipe to delete",
+  ];
+
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -75,6 +81,38 @@ class _WidgetScreenState extends State<WidgetScreen> {
                 ),
               ),
             ),
+            SizedBox(height: 24),
+
+            _buildSectionTitle("3. Dismissible (Swipe to Dismiss)"),
+            Text("Swipe any item below horizontally to delete it: "),
+            SizedBox(height: 8),
+            for (final item in dismissibleItems)
+              Dismissible(
+                key: Key(item),
+                background: Container(
+                  color: Colors.red,
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Icon(Icons.delete, color: Colors.white),
+                ),
+                secondaryBackground: Container(
+                  color: Colors.red,
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Icon(Icons.delete, color: Colors.white),
+                ),
+                onDismissed: (direction) {
+                  setState(() {
+                    dismissibleItems.remove(item);
+                  });
+                },
+                child: Card(
+                  child: ListTile(
+                    leading: Icon(Icons.swipe),
+                    title: Text(item),
+                  ),
+                ),
+              ),
             SizedBox(height: 24),
           ],
         ),
