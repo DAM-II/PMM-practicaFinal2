@@ -1,17 +1,41 @@
-// Justification: StatelessWidget is chosen because this screen currently
-// displays static content without mutable state or internal reactivity.
+// Justification: StatefulWidget is chosen because this screen maintains mutable state (the Persona profile)
+// and must trigger a UI rebuild via setState() when updated data is returned from PersonalScreen.
 
 import 'package:flutter/material.dart';
 import 'package:pf2/models/persona.dart';
 import 'package:pf2/widgets/profile_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Persona persona = Persona.defaultValues();
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  Persona _persona = Persona.defaultValues();
+
+  void _navigateToEditProfile() async {
+    final result = await Navigator.pushNamed(
+      context,
+      '/personal',
+      arguments: _persona,
+    );
+
+    if (result == Persona) {
+      setState(() {
+        _persona = result;
+      });
+    }
+  }
+
+  // navigate to widget showcase
+  void _navigateToWidgetShowcase() {
+    Navigator.pushNamed(context, '/widget');
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("DevProfile M3")),
       body: Padding(
@@ -19,12 +43,15 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             // Profile Card
-            ProfileCard(persona: persona),
+            ProfileCard(persona: _persona),
             SizedBox(height: 20),
             // Action Buttons
-            ElevatedButton(onPressed: () => {}, child: Text("Edit Profile")),
             ElevatedButton(
-              onPressed: () => {},
+              onPressed: _navigateToEditProfile,
+              child: Text("Edit Profile"),
+            ),
+            ElevatedButton(
+              onPressed: _navigateToWidgetShowcase,
               child: Text("Explore Widget Showcase"),
             ),
           ],
