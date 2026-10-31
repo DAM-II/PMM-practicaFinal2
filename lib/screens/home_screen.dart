@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pf2/models/persona.dart';
+import 'package:pf2/screens/personal_screen.dart';
 import 'package:pf2/widgets/profile_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,13 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Persona _persona = Persona.defaultValues();
 
   void _navigateToEditProfile() async {
-    final result = await Navigator.pushNamed(
+    final result = await Navigator.push(
       context,
-      '/personal',
-      arguments: _persona,
+      MaterialPageRoute(
+        builder: (context) => PersonalScreen(persona: _persona),
+      ),
     );
 
-    if (result == Persona) {
+    if (result is Persona) {
       setState(() {
         _persona = result;
       });
@@ -37,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("DevProfile M3")),
+      appBar: AppBar(title: const Text("DevProfile M3")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -48,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Action Buttons
             ElevatedButton(
               onPressed: _navigateToEditProfile,
-              child: Text("Edit Profile"),
+              child: const Text("Edit Profile"),
             ),
             ElevatedButton(
               onPressed: _navigateToWidgetShowcase,
