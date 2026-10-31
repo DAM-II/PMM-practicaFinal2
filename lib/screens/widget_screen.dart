@@ -17,6 +17,12 @@ class _WidgetScreenState extends State<WidgetScreen> {
     "Swipe to delete",
   ];
 
+  List<String> reorderableItems = [
+    "Item 1: Drag me around",
+    "Item 2: Long press to reorder",
+    "Item 3: Move me up or down",
+  ];
+
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -25,6 +31,16 @@ class _WidgetScreenState extends State<WidgetScreen> {
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );
+  }
+
+  void _onReorder(int oldIndex, int newIndex) {
+    setState(() {
+      if (newIndex > oldIndex) {
+        newIndex -= 1;
+      }
+      final item = reorderableItems.removeAt(oldIndex);
+      reorderableItems.insert(newIndex, item);
+    });
   }
 
   @override
@@ -114,6 +130,26 @@ class _WidgetScreenState extends State<WidgetScreen> {
                 ),
               ),
             SizedBox(height: 24),
+
+            // 4: ReorderbleListView
+            _buildSectionTitle("4. ReorderableListView (Drag to Reorder)"),
+            Text("Long press and drag any item to change its position: "),
+            SizedBox(height: 8),
+            ReorderableListView(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              onReorder: _onReorder,
+              children: [
+                for (String item in reorderableItems)
+                  Card(
+                    key: ValueKey(item),
+                    child: ListTile(
+                      leading: Icon(Icons.drag_handle),
+                      title: Text(item),
+                    ),
+                  ),
+              ],
+            ),
           ],
         ),
       ),
