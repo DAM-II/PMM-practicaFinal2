@@ -8,8 +8,8 @@ class AppRoutes {
   static const String initialRoute = '/home';
 
   static Map<String, WidgetBuilder> routes = {
-    '/home': (context) => HomeScreen(),
+    '/home': (context) => const HomeScreen(),
     '/personal': (context) => PersonalScreen(persona: Persona.defaultValues()),
-    '/widget': (context) => WidgetScreen(),
+    '/widget': (context) => const WidgetScreen(),
   };
 }

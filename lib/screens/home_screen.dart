@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Profile Card
             ProfileCard(persona: _persona),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Action Buttons
             ElevatedButton(
               onPressed: _navigateToEditProfile,

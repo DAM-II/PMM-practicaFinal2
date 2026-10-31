@@ -81,7 +81,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     bool isPassword = false,
     bool isCapitalised = false,
     bool isReadOnly = false,
-    onTap = null,
+    onTap,
   }) {
     return TextField(
       controller: controller,
@@ -94,7 +94,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
           : TextCapitalization.none,
       decoration: InputDecoration(
         labelText: label,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
     );
   }
@@ -102,7 +102,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("ToDo")),
+      appBar: AppBar(title: Text("Oluwamuyiwa - Edit Profile")),
       body: (SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -112,23 +112,23 @@ class _PersonalScreenState extends State<PersonalScreen> {
               firstNameController,
               isCapitalised: true,
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildTextField("Last Name", lastNameController),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildTextField("Email", emailController, isEmail: true),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildTextField("Password", passwordController, isPassword: true),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildTextField(
               "Date of Birth",
               birthDateController,
               isReadOnly: true,
               onTap: _pickDate,
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             ElevatedButton(
               onPressed: _saveAndReturn,
-              child: Text("Save and Return"),
+              child: const Text("Save and Return"),
             ),
           ],
         ),

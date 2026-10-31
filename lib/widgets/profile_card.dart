@@ -18,7 +18,7 @@ class ProfileCard extends StatelessWidget {
             Text(persona.fullName),
             SizedBox(height: 8),
             Text(persona.email),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               "${persona.birthDate.day}/${persona.birthDate.month}/${persona.birthDate.year}",
             ),

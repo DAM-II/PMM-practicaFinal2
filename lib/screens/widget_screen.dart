@@ -28,16 +28,13 @@ class _WidgetScreenState extends State<WidgetScreen> {
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Text(
         title,
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  void _onReorder(int oldIndex, int newIndex) {
+  void _onReorderItem(int oldIndex, int newIndex) {
     setState(() {
-      if (newIndex > oldIndex) {
-        newIndex -= 1;
-      }
       final item = reorderableItems.removeAt(oldIndex);
       reorderableItems.insert(newIndex, item);
     });
@@ -48,7 +45,7 @@ class _WidgetScreenState extends State<WidgetScreen> {
     String whatIsFlutterExp =
         "Flutter is Google's UI toolkit for building natively compiled applicatons for mobile, web, and desktop from a single codebase";
     return Scaffold(
-      appBar: AppBar(title: Text("Widget Showcase")),
+      appBar: AppBar(title: const Text("Widget Showcase")),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -57,9 +54,9 @@ class _WidgetScreenState extends State<WidgetScreen> {
             _buildSectionTitle("1. ExpansionTile"),
             Card(
               child: ExpansionTile(
-                leading: Icon(Icons.info_outline),
-                title: Text("What is Flutter?"),
-                subtitle: Text("Tap to expand/collapse"),
+                leading: const Icon(Icons.info_outline),
+                title: const Text("What is Flutter?"),
+                subtitle: const Text("Tap to expand/collapse"),
                 children: [
                   Padding(
                     padding: EdgeInsets.all(16.0),
@@ -68,11 +65,11 @@ class _WidgetScreenState extends State<WidgetScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // 2: Interactive Viewer
             _buildSectionTitle("2. InteractiveViewer (Pans & Zoom)"),
-            Text("Ping or drag the box below to zoom and pan: "),
+            const Text("Pinch or drag the box below to zoom and pan: "),
             SizedBox(height: 8),
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
@@ -97,7 +94,7 @@ class _WidgetScreenState extends State<WidgetScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             _buildSectionTitle("3. Dismissible (Swipe to Dismiss)"),
             Text("Swipe any item below horizontally to delete it: "),
@@ -129,7 +126,7 @@ class _WidgetScreenState extends State<WidgetScreen> {
                   ),
                 ),
               ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // 4: ReorderbleListView
             _buildSectionTitle("4. ReorderableListView (Drag to Reorder)"),
@@ -137,14 +134,14 @@ class _WidgetScreenState extends State<WidgetScreen> {
             SizedBox(height: 8),
             ReorderableListView(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              onReorder: _onReorder,
+              physics: const NeverScrollableScrollPhysics(),
+              onReorderItem: _onReorderItem,
               children: [
                 for (String item in reorderableItems)
                   Card(
                     key: ValueKey(item),
                     child: ListTile(
-                      leading: Icon(Icons.drag_handle),
+                      leading: const Icon(Icons.drag_handle),
                       title: Text(item),
                     ),
                   ),
